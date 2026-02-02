@@ -1,0 +1,19 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+
+# ===== Virtual environments =====
+.venv/
+venv/
+backend/.venv/
+
+# ===== Ruff =====
+.ruff_cache/
+
+# ===== Databases =====
+*.db
+*.sqlite3
+
+# ===== Env files =====
+.env
+.env.*
