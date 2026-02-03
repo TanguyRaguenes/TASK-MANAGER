@@ -37,3 +37,18 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk test
+
+      # -------- Docker build --------
+      - name: Build Docker image
+        run: docker build -t eni-prometheus:${{ github.sha }} .
+
+      # -------- Trivy --------
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: eni-prometheus:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
