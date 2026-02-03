@@ -38,11 +38,9 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk test
 
-      # -------- Docker build --------
       - name: Build Docker image
         run: docker build -t eni-prometheus:${{ github.sha }} .
 
-      # -------- Trivy --------
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.33.1
         with:
