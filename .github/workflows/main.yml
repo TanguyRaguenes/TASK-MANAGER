@@ -38,13 +38,13 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk test
 
-      - name: Build Docker image TRAG
-        run: docker build -t eni-prometheus:${{ github.sha }} .
+      - name: Build Docker image
+        run: docker build -t custom-prometheus:${{ github.sha }} .
 
-      - name: Run Trivy vulnerability scanner TRAG
+      - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.33.1
         with:
-          image-ref: eni-prometheus:${{ github.sha }}
+          image-ref: custom-prometheus:${{ github.sha }}
           format: table
           exit-code: '1'
           ignore-unfixed: true
