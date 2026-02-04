@@ -39,12 +39,13 @@ jobs:
         run: snyk test
 
       - name: Build Docker image
-        run: docker build -t custom-prometheus:${{ github.sha }} .
+        working-directory: backend
+        run: docker build -t custom-image:${{ github.sha }} .
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.33.1
         with:
-          image-ref: custom-prometheus:${{ github.sha }}
+          image-ref: custom-image:${{ github.sha }}
           format: table
           exit-code: '1'
           ignore-unfixed: true
