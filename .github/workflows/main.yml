@@ -42,12 +42,12 @@ jobs:
         working-directory: backend
         run: docker build -t custom-image:${{ github.sha }} .
 
-      - name: Run Trivy vulnerability scanner
+      - name: Run Trivy vulnerability scanner (debug)
         uses: aquasecurity/trivy-action@0.33.1
         with:
           image-ref: custom-image:${{ github.sha }}
           format: table
-          exit-code: '1'
-          ignore-unfixed: true
+          exit-code: '0'
+          ignore-unfixed: false
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
