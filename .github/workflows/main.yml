@@ -47,7 +47,7 @@ jobs:
         with:
           image-ref: custom-image:${{ github.sha }}
           format: table
-          exit-code: '0'
-          ignore-unfixed: false
+          exit-code: '1'
+          ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+          severity: 'CRITICAL,HIGH'
