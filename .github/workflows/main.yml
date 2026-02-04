@@ -38,6 +38,12 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk test
 
+      - name: Run Hadolint (Dockerfile lint)
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: backend/Dockerfile
+          failure-threshold: error
+
       - name: Build Docker image
         working-directory: backend
         run: docker build -t custom-image:${{ github.sha }} .
